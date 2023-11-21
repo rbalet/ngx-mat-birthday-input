@@ -1,0 +1,15 @@
+{
+  "name": "ngx-mat-birthday-input",
+  "version": "17.0.0",
+  "peerDependencies": {
+    "@angular/cdk": ">=15.x",
+    "@angular/common": ">=15.x",
+    "@angular/core": ">=15.x",
+    "@angular/forms": ">=15.x",
+    "@angular/material": ">=15.x"
+  },
+  "dependencies": {
+    "tslib": "^2.6.2"
+  },
+  "sideEffects": false
+}

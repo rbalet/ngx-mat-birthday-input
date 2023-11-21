@@ -1,0 +1,6 @@
+:host {
+  .birthday-form {
+    display: flex;
+    gap: var(--ngx-mat-birthday-input-gap, 16px);
+  }
+}

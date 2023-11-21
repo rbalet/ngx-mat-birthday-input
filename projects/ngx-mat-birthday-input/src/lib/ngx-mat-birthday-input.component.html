@@ -1,0 +1,36 @@
+<form class="birthday-form" [formGroup]="itemForm" [autocomplete]="autocomplete">
+  <mat-form-field class="day-input" subscriptSizing="dynamic">
+    <mat-label *ngIf="labels">{{ labels[0] }}</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="day"
+      name="day"
+      autocomplete="bday-day"
+      max="31"
+    />
+  </mat-form-field>
+  <mat-form-field class="month-input" subscriptSizing="dynamic">
+    <mat-label *ngIf="labels">{{ labels[1] }}</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="month"
+      name="month"
+      autocomplete="bday-month"
+      max="12"
+      #monthInput
+    />
+  </mat-form-field>
+  <mat-form-field class="year-input" subscriptSizing="dynamic">
+    <mat-label *ngIf="labels">{{ labels[2] }}</mat-label>
+    <input
+      matInput
+      type="number"
+      formControlName="year"
+      name="year"
+      autocomplete="bday-year"
+      #yearInput
+    />
+  </mat-form-field>
+</form>
