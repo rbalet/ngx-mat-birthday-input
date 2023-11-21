@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-birthday-input",
-  "version": "17.0.1",
+  "version": "17.0.2",
   "peerDependencies": {
     "@angular/cdk": ">=15.x",
     "@angular/common": ">=15.x",

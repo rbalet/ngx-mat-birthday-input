@@ -218,10 +218,13 @@ export class NgxMatBirthdayInputComponent
   }
 
   private _createItemForm(birthday?: Date) {
+    let tempBDay;
+    if (birthday) tempBDay = new Date(birthday);
+
     return this._formBuilder.group({
-      day: birthday?.getDay() || null,
-      month: birthday?.getMonth() || null,
-      year: birthday?.getFullYear() || null,
+      day: tempBDay?.getDay() || null,
+      month: tempBDay?.getMonth() || null,
+      year: tempBDay?.getFullYear() || null,
     });
   }
 
