@@ -5,7 +5,7 @@ I split a date into 3 input fields, day, month and year, then reassemble and sav
 The UI is based on the [Vitaly Friedman](https://www.smashingmagazine.com/author/vitaly-friedman/) article, [Designing Birthday Picker UX: Simpler Is Better](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker/#designing-a-better-birthday-input)
 
 
-![Input example](/assets/example.png)
+![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-birthday-input/main/assets/example.png)
 
 **Supports:**
 - Angular >=15
@@ -66,3 +66,9 @@ imports: [NgxMatBirthdayInputComponent];
 | Name                           | Default | Explanation                       |
 | ------------------------------ | ------- | --------------------------------- |
 | `--ngx-mat-birthday-input-gap` | `16px`  | Change the gap between the inputs |
+
+
+## Authors and acknowledgment
+* maintainer [Raphaël Balet](https://github.com/rbalet)
+
+[![BuyMeACoffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/widness)
