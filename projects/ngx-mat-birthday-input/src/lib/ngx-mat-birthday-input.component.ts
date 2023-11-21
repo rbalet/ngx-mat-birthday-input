@@ -152,7 +152,7 @@ export class NgxMatBirthdayInputComponent
           value.year > -1
         ) {
           this.propagateChange(
-            new Date(value.year, value.month, value.day).toString()
+            new Date(value.year, value.month, value.day).toISOString()
           );
           this._changeDetectorRef.markForCheck();
         }
@@ -240,8 +240,6 @@ export class NgxMatBirthdayInputComponent
   }
 
   writeValue(value: any): void {
-    console.log("writeValue", value);
-
     if (!value) this._createItemForm();
     else if (value === "string") this._createItemForm(new Date(value.query));
     else this._createItemForm(value as Date);
