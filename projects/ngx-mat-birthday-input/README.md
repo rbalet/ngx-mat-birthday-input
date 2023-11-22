@@ -44,7 +44,7 @@ imports: [NgxMatBirthdayInputComponent];
     </ngx-mat-birthday-input>
 
     <!-- <mat-icon matSuffix>event</mat-icon>
-    <mat-error *ngIf="authRegistrationService.itemForm?.get('birthday').invalid">
+    <mat-error *ngIf="birthdayForm?.get('birthday').invalid">
       {{ Invalide error message }}
     </mat-error> -->
   </mat-form-field>
