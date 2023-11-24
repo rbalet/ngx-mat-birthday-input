@@ -168,7 +168,7 @@ export class NgxMatBirthdayInputComponent
         else if (typeof value === "number" && value < 0)
           this.itemForm.get("day")?.setValue(1);
 
-        if (value >= 10 && value <= 31) {
+        if ((value >= 10 && value <= 31) || value > 3) {
           this.monthInput.nativeElement.focus();
         }
       });
@@ -217,16 +217,21 @@ export class NgxMatBirthdayInputComponent
     }
   }
 
-  private _createItemForm(birthday?: Date) {
-    let tempBDay;
+  private _createItemForm(birthday?: string) {
+    let day = null;
+    let month = null;
+    let year = null;
     if (birthday) {
-      tempBDay = new Date(birthday);
+      const tempBDay = new Date(birthday);
+      day = tempBDay.getDay();
+      month = tempBDay.getMonth();
+      year = tempBDay.getFullYear();
     }
 
     return this._formBuilder.group({
-      day: tempBDay?.getDay() || null,
-      month: tempBDay?.getMonth() || null,
-      year: tempBDay?.getFullYear() || null,
+      day: day,
+      month: month,
+      year: year,
     });
   }
 
@@ -245,9 +250,7 @@ export class NgxMatBirthdayInputComponent
   }
 
   writeValue(value: any): void {
-    if (!value) this._createItemForm();
-    else if (value === "string") this._createItemForm(new Date(value.query));
-    else this._createItemForm(value as Date);
+    this.itemForm = this._createItemForm(value);
 
     // Value is set from outside using setValue()
     this._changeDetectorRef.markForCheck();
