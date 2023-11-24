@@ -18,6 +18,7 @@ import {
 } from "@angular/core";
 import {
   FormBuilder,
+  FormGroup,
   FormGroupDirective,
   FormsModule,
   NgControl,
@@ -162,6 +163,7 @@ export class NgxMatBirthdayInputComponent
       .get("day")
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
+        console.log(value);
         if (typeof value !== "number") return;
 
         if (value > 31) this.itemForm.get("day")?.setValue(31);
@@ -217,13 +219,13 @@ export class NgxMatBirthdayInputComponent
     }
   }
 
-  private _createItemForm(birthday?: string) {
+  private _createItemForm(birthday?: string): FormGroup {
     let day = null;
     let month = null;
     let year = null;
     if (birthday) {
       const tempBDay = new Date(birthday);
-      day = tempBDay.getDay();
+      day = tempBDay.getDate();
       month = tempBDay.getMonth();
       year = tempBDay.getFullYear();
     }
@@ -233,6 +235,27 @@ export class NgxMatBirthdayInputComponent
       month: month,
       year: year,
     });
+  }
+
+  private _updateItemForm(birthday?: string): void {
+    let day = null;
+    let month = null;
+    let year = null;
+    if (birthday) {
+      const tempBDay = new Date(birthday);
+      day = tempBDay.getDate();
+      month = tempBDay.getMonth();
+      year = tempBDay.getFullYear();
+    }
+
+    this.itemForm.patchValue(
+      {
+        day: day,
+        month: month,
+        year: year,
+      },
+      { emitEvent: false }
+    );
   }
 
   registerOnChange(fn: any): void {
@@ -250,7 +273,7 @@ export class NgxMatBirthdayInputComponent
   }
 
   writeValue(value: any): void {
-    this.itemForm = this._createItemForm(value);
+    this._updateItemForm(value);
 
     // Value is set from outside using setValue()
     this._changeDetectorRef.markForCheck();
