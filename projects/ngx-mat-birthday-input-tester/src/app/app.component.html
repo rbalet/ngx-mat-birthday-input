@@ -1,0 +1,14 @@
+<h1>Mat birthday Input example</h1>
+
+<form #f="ngForm" [formGroup]="birthdayForm">
+  <mat-form-field floatLabel="always">
+    <mat-label>Birthday</mat-label>
+
+    <!-- @TODO : add min & max -->
+    <ngx-mat-birthday-input formControlName="birthday" id="birthday"></ngx-mat-birthday-input>
+
+    <mat-icon matSuffix>event</mat-icon>
+
+    <mat-error *ngIf="birthdayForm?.get('birthday')?.invalid"> Invalide error message </mat-error>
+  </mat-form-field>
+</form>

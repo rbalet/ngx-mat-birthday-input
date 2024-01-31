@@ -11,6 +11,9 @@ The UI is based on the [Vitaly Friedman](https://www.smashingmagazine.com/author
 - Angular >=15
 - Angular Material >=15
 
+## Demo
+- https://stackblitz.com/~/github.com/rbalet/ngx-mat-birthday-input
+
  ## Installation
 
  `npm i ngx-mat-birthday-input`

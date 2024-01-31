@@ -1,6 +1,13 @@
 {
   "name": "ngx-mat-birthday-input",
-  "version": "17.0.6",
+  "version": "17.1.0",
+  "author": {
+    "name": "Raphaël Balet",
+    "email": "raphael.balet@outlook.com"
+  },
+  "maintainers": [
+    "raphael.balet@outlook.com"
+  ],
   "peerDependencies": {
     "@angular/cdk": ">=15.x",
     "@angular/common": ">=15.x",
@@ -8,6 +15,16 @@
     "@angular/forms": ">=15.x",
     "@angular/material": ">=15.x"
   },
+  "keywords": [
+    "angular",
+    "input",
+    "birthday"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbalet/ngx-mat-birthday-input"
+  },
+  "license": "MIT",
   "dependencies": {
     "tslib": "^2.6.2"
   },
