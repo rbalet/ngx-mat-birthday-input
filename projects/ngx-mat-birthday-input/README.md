@@ -1,9 +1,14 @@
 # NgxMatBirthdayInput
-An Angular Material package for entering a birthday. 
-I split a date into 3 input fields, day, month and year, then reassemble and save them into a given formControl
+An Angular Material library for entering a birthday. 
+
+![NPM](https://img.shields.io/npm/l/ngx-href)
+[![npm version](https://img.shields.io/npm/v/ngx-mat-birthday-input.svg)](https://www.npmjs.com/package/ngx-mat-birthday-input)
+![npm bundle size](https://img.shields.io/bundlephobia/min/ngx-mat-birthday-input)
+![npm](https://img.shields.io/npm/dm/ngx-mat-birthday-input)
+
+It split a date into 3 input fields, day, month and year, then reassemble and save them into a given formControl
 
 The UI is based on the [Vitaly Friedman](https://www.smashingmagazine.com/author/vitaly-friedman/) article, [Designing Birthday Picker UX: Simpler Is Better](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker/#designing-a-better-birthday-input)
-
 
 ![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-birthday-input/main/assets/example.png)
 
