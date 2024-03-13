@@ -9,7 +9,7 @@
     "test": "ng test",
     "test:ci": "ng test ngx-mat-birthday-input --watch=false --code-coverage --no-progress --browsers=ChromeHeadless",
     "publish": "ng build ngx-mat-birthday-input --configuration production && npm publish ./dist/ngx-mat-birthday-input",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
