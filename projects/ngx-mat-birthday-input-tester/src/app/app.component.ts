@@ -7,8 +7,12 @@ import { FormBuilder, Validators } from '@angular/forms'
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  birthdayForm = this._formBuilder.group({
+  emptyBirthdayForm = this._formBuilder.group({
     birthday: [new Date(), [Validators.max]],
+  })
+
+  filledBirthdayForm = this._formBuilder.group({
+    birthday: ['', [Validators.max]],
   })
 
   tomorrow = new Date().getDate() + 1

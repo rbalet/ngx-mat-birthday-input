@@ -3,22 +3,26 @@
     <mat-label *ngIf="labels">{{ labels[0] }}</mat-label>
     <input
       matInput
-      type="number"
+      type="string"
       formControlName="day"
       name="day"
       autocomplete="bday-day"
       max="31"
+      inputMode="numeric"
+      [placeholder]="placeholders[0]"
     />
   </mat-form-field>
   <mat-form-field class="month-input" subscriptSizing="dynamic">
     <mat-label *ngIf="labels">{{ labels[1] }}</mat-label>
     <input
       matInput
-      type="number"
+      type="string"
       formControlName="month"
       name="month"
       autocomplete="bday-month"
       max="12"
+      inputMode="numeric"
+      [placeholder]="placeholders[1]"
       #monthInput
     />
   </mat-form-field>
@@ -26,10 +30,12 @@
     <mat-label *ngIf="labels">{{ labels[2] }}</mat-label>
     <input
       matInput
-      type="number"
+      type="string"
       formControlName="year"
       name="year"
       autocomplete="bday-year"
+      inputMode="numeric"
+      [placeholder]="placeholders[2]"
       #yearInput
     />
   </mat-form-field>

@@ -18,6 +18,7 @@ import {
 } from '@angular/core'
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   FormGroupDirective,
   FormsModule,
@@ -78,12 +79,18 @@ export class NgxMatBirthdayInputComponent
   id = `ngx-mat-birthday-input-${NgxMatBirthdayInputComponent.nextId++}`
 
   itemForm = this._createItemForm()
+  private _controls = {
+    day: this.itemForm.get('day'),
+    month: this.itemForm.get('month'),
+    year: this.itemForm.get('year'),
+  }
+
   today = new Date()
 
   @Input() autocomplete: 'on' | 'off' = 'on'
   @Input() errorStateMatcher: ErrorStateMatcher = this._defaultErrorStateMatcher
-  @Input() labels: string[] = ['DD', 'MM', 'YYYY']
-  @Input() placeholders?: string[]
+  @Input() labels: [string, string, string] = ['DD', 'MM', 'YYYY']
+  @Input() placeholders: [string, string, string] = ['', '', '']
   @Input() name?: string
 
   @Output() dateChanged: EventEmitter<Date> = new EventEmitter<Date>()
@@ -96,6 +103,12 @@ export class NgxMatBirthdayInputComponent
   focused = false
   describedBy = ''
   value?: any
+
+  private _formerValues = {
+    day: '',
+    month: '',
+    year: '',
+  }
 
   onTouched = () => {}
 
@@ -133,17 +146,17 @@ export class NgxMatBirthdayInputComponent
     })
 
     this.itemForm.valueChanges.pipe(takeUntil(this._unsubscribe$)).subscribe((value) => {
-      this._isEmpty = !value.day && !value.month && value.year ? true : false
+      this._isEmpty = !value.day && !value.month && !value.year ? true : false
 
       if (
-        typeof value.day === 'number' &&
-        value.day > -1 &&
-        typeof value.month === 'number' &&
-        value.month > -1 &&
-        typeof value.year === 'number' &&
-        value.year > -1
+        value?.day?.length &&
+        value.day.length >= 2 &&
+        value?.month?.length &&
+        value.month.length >= 2 &&
+        value?.year?.length &&
+        value.year.length >= 4
       ) {
-        this.propagateChange(new Date(value.year, value.month, value.day).toISOString())
+        this.propagateChange(new Date(+value.year, +value.month, +value.day).toISOString())
         this._changeDetectorRef.markForCheck()
       }
     })
@@ -152,14 +165,20 @@ export class NgxMatBirthdayInputComponent
       .get('day')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        console.log(value)
-        if (typeof value !== 'number') return
+        if (!this._controlValue(value, 'day')) return
+        if (value.includes('00')) {
+          this._controls.day?.setValue(this._formerValues.day)
+          return
+        }
 
-        if (value > 31) this.itemForm.get('day')?.setValue(31)
-        else if (typeof value === 'number' && value < 0) this.itemForm.get('day')?.setValue(1)
+        if (+value > 31) this._controls.day?.setValue('31')
+        else if (typeof value === 'number' && value < 0) this._controls.day?.setValue('01')
 
-        if ((value >= 10 && value <= 31) || value > 3) {
-          this.monthInput.nativeElement.focus()
+        if ((+value >= 10 && +value <= 31) || +value > 3 || value.length >= 2) {
+          if (+value < 10 && !value.toString().includes('0'))
+            this._controls.day?.setValue(`0${value}`)
+
+          this.monthInput?.nativeElement.focus()
         }
       })
 
@@ -167,16 +186,20 @@ export class NgxMatBirthdayInputComponent
       .get('month')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        if (typeof value !== 'number') return
+        if (!this._controlValue(value, 'month')) return
+        if (value.includes('00')) {
+          this._controls.month?.setValue(this._formerValues.month)
+          return
+        }
 
-        if (value > 12) this.itemForm.get('month')?.setValue(12)
-        else if (typeof value === 'number' && value < 0) this.itemForm.get('month')?.setValue(1)
+        if (+value > 12) this._controls.month?.setValue('12')
+        else if (typeof value === 'number' && value < 0) this._controls.month?.setValue('01')
 
-        if (value >= 2 && value <= 12) {
-          if (value < 10 && !value.toString().includes('0'))
-            this.itemForm.get('month')?.setValue(`0${value}`)
+        if (+value >= 2 && +value <= 12) {
+          if (+value < 10 && !value.toString().includes('0'))
+            this._controls.month?.setValue(`0${value}`)
 
-          this.yearInput.nativeElement.focus()
+          this.yearInput?.nativeElement.focus()
         }
       })
 
@@ -184,14 +207,15 @@ export class NgxMatBirthdayInputComponent
       .get('year')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        if (typeof value !== 'number') return
-        if (value > this.today.getFullYear())
-          this.itemForm.get('year')?.setValue(this.today.getFullYear())
-        else if (
-          typeof value === 'number' &&
-          (value < 0 || (value > 1000 && value < this.today.getFullYear() - 120))
-        )
-          this.itemForm.get('year')?.setValue(this.today.getFullYear() - 120)
+        if (!this._controlValue(value, 'year')) return
+        if (value.startsWith('0')) {
+          this._controls.year?.setValue('')
+        }
+
+        if (+value > this.today.getFullYear())
+          this._controls.year?.setValue(this.today.getFullYear().toString())
+        else if (+value < 0 || (+value > 1000 && +value < this.today.getFullYear() - 120))
+          this._controls.year?.setValue((+this.today.getFullYear() - 120).toString())
       })
   }
 
@@ -207,43 +231,35 @@ export class NgxMatBirthdayInputComponent
     }
   }
 
-  private _createItemForm(birthday?: string): FormGroup {
-    let day = null
-    let month = null
-    let year = null
-    if (birthday) {
-      const tempBDay = new Date(birthday)
-      day = tempBDay.getDate()
-      month = tempBDay.getMonth()
-      year = tempBDay.getFullYear()
-    }
-
+  private _createItemForm(): FormGroup<{
+    day: FormControl<string>
+    month: FormControl<string>
+    year: FormControl<string>
+  }> {
     return this._formBuilder.group({
-      day: day,
-      month: month,
-      year: year,
+      day: new FormControl('', { nonNullable: true }),
+      month: new FormControl('', { nonNullable: true }),
+      year: new FormControl('', { nonNullable: true }),
     })
   }
 
   private _updateItemForm(birthday?: string): void {
-    let day = null
-    let month = null
-    let year = null
+    let day = ''
+    let month = ''
+    let year = ''
+
     if (birthday) {
       const tempBDay = new Date(birthday)
-      day = tempBDay.getDate()
-      month = tempBDay.getMonth()
-      year = tempBDay.getFullYear()
+      day = tempBDay.getDate().toString()
+      month = tempBDay.getMonth().toString()
+      year = tempBDay.getFullYear().toString()
     }
 
-    this.itemForm.patchValue(
-      {
-        day: day,
-        month: month,
-        year: year,
-      },
-      { emitEvent: false },
-    )
+    this.itemForm.patchValue({
+      day: day,
+      month: month,
+      year: year,
+    })
   }
 
   registerOnChange(fn: any): void {
@@ -331,5 +347,18 @@ export class NgxMatBirthdayInputComponent
 
     this._unsubscribe$.next()
     this._unsubscribe$.complete()
+  }
+
+  /**
+   * @do Avoid being able to enter incorrect values like e, 0.3, ...
+   */
+  private _controlValue(value: string, target: 'day' | 'month' | 'year'): boolean {
+    if (isNaN(+value) || value.includes('.')) {
+      this._controls[target]?.setValue(this._formerValues[target])
+      return false
+    }
+
+    this._formerValues[target] = value
+    return true
   }
 }
