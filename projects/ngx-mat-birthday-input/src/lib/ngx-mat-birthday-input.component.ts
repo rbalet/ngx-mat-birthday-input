@@ -256,8 +256,8 @@ export class NgxMatBirthdayInputComponent
     }
 
     this.itemForm.patchValue({
-      day: day,
-      month: month,
+      day: this._addZero(day),
+      month: this._addZero(month),
       year: year,
     })
   }
@@ -360,5 +360,10 @@ export class NgxMatBirthdayInputComponent
 
     this._formerValues[target] = value
     return true
+  }
+
+  private _addZero(number: string) {
+    if (number.length === 1) return '0' + number
+    return number
   }
 }
