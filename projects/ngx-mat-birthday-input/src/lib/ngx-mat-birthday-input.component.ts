@@ -195,7 +195,7 @@ export class NgxMatBirthdayInputComponent
         if (+value > 12) this._controls.month?.setValue('12')
         else if (typeof value === 'number' && value < 0) this._controls.month?.setValue('01')
 
-        if (+value >= 2 && +value <= 12) {
+        if ((+value >= 2 && +value <= 12) || value.length >= 2) {
           if (+value < 10 && !value.toString().includes('0'))
             this._controls.month?.setValue(`0${value}`)
 
