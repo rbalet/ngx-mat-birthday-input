@@ -165,11 +165,11 @@ export class NgxMatBirthdayInputComponent
       .get('day')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        if (!this._controlValue(value, 'day')) return
         if (value.includes('00')) {
           this._controls.day?.setValue(this._formerValues.day)
           return
         }
+        if (!this._controlValue(value, 'day')) return
 
         if (+value > 31) this._controls.day?.setValue('31')
         else if (typeof value === 'number' && value < 0) this._controls.day?.setValue('01')
@@ -186,11 +186,11 @@ export class NgxMatBirthdayInputComponent
       .get('month')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        if (!this._controlValue(value, 'month')) return
         if (value.includes('00')) {
           this._controls.month?.setValue(this._formerValues.month)
           return
         }
+        if (!this._controlValue(value, 'month')) return
 
         if (+value > 12) this._controls.month?.setValue('12')
         else if (typeof value === 'number' && value < 0) this._controls.month?.setValue('01')
