@@ -16,11 +16,15 @@
 </form>
 
 <form #f2="ngForm" [formGroup]="emptyBirthdayForm">
-  <mat-form-field floatLabel="always">
+  <mat-form-field floatLabel="always" appearance="outline">
     <mat-label>Birthday</mat-label>
 
     <!-- @TODO : add min & max -->
-    <ngx-mat-birthday-input formControlName="birthday" id="birthday"></ngx-mat-birthday-input>
+    <ngx-mat-birthday-input
+      formControlName="birthday"
+      id="birthday"
+      appearance="outline"
+    ></ngx-mat-birthday-input>
 
     <mat-icon matSuffix>event</mat-icon>
 

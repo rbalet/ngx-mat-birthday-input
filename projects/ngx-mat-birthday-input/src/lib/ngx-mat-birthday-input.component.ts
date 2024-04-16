@@ -27,7 +27,11 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 import { ErrorStateMatcher, _AbstractConstructor, mixinErrorState } from '@angular/material/core'
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field'
+import {
+  MatFormFieldAppearance,
+  MatFormFieldControl,
+  MatFormFieldModule,
+} from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { Subject, takeUntil } from 'rxjs'
 
@@ -92,6 +96,7 @@ export class NgxMatBirthdayInputComponent
   @Input() labels: [string, string, string] = ['DD', 'MM', 'YYYY']
   @Input() placeholders: [string, string, string] = ['', '', '']
   @Input() name?: string
+  @Input() appearance: MatFormFieldAppearance = 'fill'
 
   @Output() dateChanged: EventEmitter<Date> = new EventEmitter<Date>()
 
