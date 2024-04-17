@@ -65,12 +65,12 @@ imports: [NgxMatBirthdayInputComponent];
 
 | Options         | Type            | Default                | Description                      |
 | --------------- | --------------- | ---------------------- | -------------------------------- |
-| formControlName | `FormControl`   | `undefined`            | Value to be updated              |
+| formControlName | `FormControl`   | `undefined`            | Control to be updated            |
 | autocomplete    | `"on" or "off"` | `"on"`                 | Use the default browser autofill |
 | labels          | `string[]`      | `["DD", "MM", "YYYY"]` | Label used by the mat-input      |
-| placeholders    | `string[]`      | `undefined`            | @TODO                            |
-| required        | `boolean`       | `undefined`            | @TODO                            |
-| disabled        | `boolean`       | `undefined`            | @TODO                            |
+| placeholders    | `string[]`      | `["", "", ""]`         | with an *s*                      |
+| required        | `boolean`       | `undefined`            |                                  |
+| disabled        | `boolean`       | `undefined`            |                                  |
 
 ## Css variable
 | Name                           | Default | Explanation                       |

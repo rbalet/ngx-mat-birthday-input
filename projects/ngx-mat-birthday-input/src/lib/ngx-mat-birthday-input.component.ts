@@ -15,6 +15,7 @@ import {
   Output,
   Self,
   ViewChild,
+  booleanAttribute,
 } from '@angular/core'
 import {
   FormBuilder,
@@ -118,6 +119,41 @@ export class NgxMatBirthdayInputComponent
   onTouched = () => {}
 
   propagateChange = (_: any) => {}
+
+  @HostBinding('class.ngx-floating')
+  get shouldLabelFloat(): boolean {
+    return this.focused || !this.empty
+  }
+
+  @Input()
+  get placeholder(): string {
+    return this._placeholder || ''
+  }
+
+  set placeholder(value: string) {
+    this._placeholder = value
+    this.stateChanges.next(undefined)
+  }
+
+  @Input({ transform: booleanAttribute })
+  get required(): boolean {
+    return this._required
+  }
+
+  set required(value: boolean) {
+    this._required = coerceBooleanProperty(value)
+    this.stateChanges.next(undefined)
+  }
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled
+  }
+
+  set disabled(value: boolean) {
+    this._disabled = coerceBooleanProperty(value)
+    this.stateChanges.next(undefined)
+  }
 
   private errorState?: boolean
   private _isEmpty = true
@@ -297,41 +333,6 @@ export class NgxMatBirthdayInputComponent
   }
   get empty(): boolean {
     return this._isEmpty
-  }
-
-  @HostBinding('class.ngx-floating')
-  get shouldLabelFloat(): boolean {
-    return this.focused || !this.empty
-  }
-
-  @Input()
-  get placeholder(): string {
-    return this._placeholder || ''
-  }
-
-  set placeholder(value: string) {
-    this._placeholder = value
-    this.stateChanges.next(undefined)
-  }
-
-  @Input()
-  get required(): boolean {
-    return this._required
-  }
-
-  set required(value: boolean) {
-    this._required = coerceBooleanProperty(value)
-    this.stateChanges.next(undefined)
-  }
-
-  @Input()
-  get disabled(): boolean {
-    return this._disabled
-  }
-
-  set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value)
-    this.stateChanges.next(undefined)
   }
 
   setDescribedByIds(ids: string[]) {

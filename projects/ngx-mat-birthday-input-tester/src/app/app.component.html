@@ -2,10 +2,14 @@
 
 <form #f1="ngForm" [formGroup]="filledBirthdayForm">
   <mat-form-field floatLabel="always">
-    <mat-label>Birthday</mat-label>
+    <mat-label>Birthday (required)</mat-label>
 
     <!-- @TODO : add min & max -->
-    <ngx-mat-birthday-input formControlName="birthday" id="birthday"></ngx-mat-birthday-input>
+    <ngx-mat-birthday-input
+      formControlName="birthday"
+      id="birthday"
+      required
+    ></ngx-mat-birthday-input>
 
     <mat-icon matSuffix>event</mat-icon>
 
@@ -33,3 +37,15 @@
     </mat-error>
   </mat-form-field>
 </form>
+
+<div class="buttons-container">
+  <button mat-stroked-button (click)="emptyBirthdayForm.reset(); filledBirthdayForm.reset()">
+    Reset
+  </button>
+  <button
+    mat-stroked-button
+    (click)="emptyBirthdayForm.markAllAsTouched(); filledBirthdayForm.markAllAsTouched()"
+  >
+    markAllAsTouched()
+  </button>
+</div>
