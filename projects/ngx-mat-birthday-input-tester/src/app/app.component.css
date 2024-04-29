@@ -6,3 +6,17 @@ mat-form-field {
   display: flex;
   gap: 16px;
 }
+
+.no-border {
+  --mat-form-field-filled-label-display: inline-block;
+  --mat-form-field-state-layer-color: transparent;
+  --mat-tree-container-background-color: transparent;
+  --mdc-filled-text-field-container-color: transparent;
+  --mdc-filled-text-field-active-indicator-color: transparent;
+  --mdc-filled-text-field-focus-active-indicator-color: transparent;
+  --mdc-filled-text-field-disabled-active-indicator-color: transparent;
+  --mdc-filled-text-field-hover-active-indicator-color: transparent;
+  --mdc-filled-text-field-error-active-indicator-color: transparent;
+  --mdc-filled-text-field-error-focus-active-indicator-color: transparent;
+  --mdc-filled-text-field-error-hover-active-indicator-color: transparent;
+}

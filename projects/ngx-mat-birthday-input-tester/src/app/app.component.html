@@ -20,7 +20,7 @@
 </form>
 
 <form #f2="ngForm" [formGroup]="emptyBirthdayForm">
-  <mat-form-field floatLabel="always" appearance="outline">
+  <mat-form-field floatLabel="always" class="no-border">
     <mat-label>Birthday</mat-label>
 
     <!-- @TODO : add min & max -->
@@ -29,8 +29,6 @@
       id="birthday"
       appearance="outline"
     ></ngx-mat-birthday-input>
-
-    <mat-icon matSuffix>event</mat-icon>
 
     <mat-error *ngIf="emptyBirthdayForm?.get('birthday')?.invalid">
       Invalide error message
