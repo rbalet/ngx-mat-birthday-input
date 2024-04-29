@@ -12,7 +12,10 @@ An Angular Material library for entering a birthday.
 4. Does **automatically focus the next field** when needed. 
 5. Based on the [Vitaly Friedman](https://www.smashingmagazine.com/author/vitaly-friedman/) article, [Designing Birthday Picker UX: Simpler Is Better](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker/#designing-a-better-birthday-input)
 
-![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-birthday-input/main/assets/example.png)
+
+| fill                                                                                                      | outlined                                                                                                    |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| ![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-birthday-input/main/assets/example.png) | ![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-birthday-input/main/assets/example-2.png) |
 
 **Supports:**
 - Angular >=15
