@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test ngx-mat-birthday-input --watch=false --code-coverage --no-progress --browsers=ChromeHeadless",
-    "publish": "ng build ngx-mat-birthday-input --configuration production && npm publish ./dist/ngx-mat-birthday-input",
+    "publish": "ng build ngx-mat-birthday-input --configuration production && npm run copy-files && npm publish ./dist/ngx-mat-birthday-input",
+    "copy-files": "cp README.md dist/ngx-mat-birthday-input && cp LICENSE dist/ngx-mat-birthday-input",
     "prepare": "husky"
   },
   "private": true,
