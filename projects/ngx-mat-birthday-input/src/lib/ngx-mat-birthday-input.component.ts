@@ -210,7 +210,6 @@ export class NgxMatBirthdayInputComponent
       .get('datePicker')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        console.log(value)
         this._controls.day?.setValue(value.getDate().toString())
         this._controls.month?.setValue(value.getMonth().toString())
         this._controls.year?.setValue(value.getFullYear().toString())
