@@ -7,12 +7,10 @@ import {
   Component,
   DoCheck,
   ElementRef,
-  EventEmitter,
   HostBinding,
   Input,
   OnDestroy,
   Optional,
-  Output,
   Self,
   ViewChild,
   booleanAttribute,
@@ -79,14 +77,14 @@ export class NgxMatBirthdayInputComponent
 {
   static nextId = 0
 
-  @ViewChild('monthInput', { static: false }) monthInput!: ElementRef
-  @ViewChild('yearInput', { static: false }) yearInput!: ElementRef
+  @ViewChild('monthInput', { static: true }) monthInput!: ElementRef
+  @ViewChild('yearInput', { static: true }) yearInput!: ElementRef
 
   @HostBinding()
-  id = `ngx-mat-birthday-input-${NgxMatBirthdayInputComponent.nextId++}`
+  id = `ngxMatBirthdayInput-${NgxMatBirthdayInputComponent.nextId++}`
 
   itemForm = this._createItemForm()
-  private _controls = {
+  controls = {
     day: this.itemForm.get('day'),
     month: this.itemForm.get('month'),
     year: this.itemForm.get('year'),
@@ -102,8 +100,7 @@ export class NgxMatBirthdayInputComponent
   @Input() appearance: MatFormFieldAppearance = 'fill'
   @Input() matDatepicker?: MatDatepicker<any>
   @Input() min?: Date
-
-  @Output() dateChanged: EventEmitter<Date> = new EventEmitter<Date>()
+  @Input() yearMethod: (value: string, controls: any) => void = this._yearMethod
 
   private _unsubscribe$: Subject<void> = new Subject()
   private _placeholder?: string
@@ -210,9 +207,10 @@ export class NgxMatBirthdayInputComponent
       .get('datePicker')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        this._controls.day?.setValue(value.getDate().toString())
-        this._controls.month?.setValue(value.getMonth().toString())
-        this._controls.year?.setValue(value.getFullYear().toString())
+        // @ToDo: Wont work with multiple datePicker - component instantiation
+        this.controls.day?.setValue(value.getDate().toString())
+        this.controls.month?.setValue(value.getMonth().toString())
+        this.controls.year?.setValue(value.getFullYear().toString())
       })
 
     this.itemForm
@@ -220,17 +218,17 @@ export class NgxMatBirthdayInputComponent
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
         if (value.includes('00')) {
-          this._controls.day?.setValue(this._formerValues.day)
+          this.controls.day?.setValue(this._formerValues.day)
           return
         }
         if (!this._controlValue(value, 'day')) return
 
-        if (+value > 31) this._controls.day?.setValue('31')
-        else if (typeof value === 'number' && value < 0) this._controls.day?.setValue('01')
+        if (+value > 31) this.controls.day?.setValue('31')
+        else if (typeof value === 'number' && value < 0) this.controls.day?.setValue('01')
 
         if ((+value >= 10 && +value <= 31) || +value > 3 || value.length >= 2) {
           if (+value < 10 && !value.toString().includes('0'))
-            this._controls.day?.setValue(`0${value}`)
+            this.controls.day?.setValue(`0${value}`)
 
           this.monthInput?.nativeElement.focus()
         }
@@ -240,18 +238,19 @@ export class NgxMatBirthdayInputComponent
       .get('month')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
+        console.log('setMonth', value)
         if (value.includes('00')) {
-          this._controls.month?.setValue(this._formerValues.month)
+          this.controls.month?.setValue(this._formerValues.month)
           return
         }
         if (!this._controlValue(value, 'month')) return
 
-        if (+value > 12) this._controls.month?.setValue('12')
-        else if (typeof value === 'number' && value < 0) this._controls.month?.setValue('01')
+        if (+value > 12) this.controls.month?.setValue('12')
+        else if (typeof value === 'number' && value < 0) this.controls.month?.setValue('01')
 
         if ((+value >= 2 && +value <= 12) || value.length >= 2) {
           if (+value < 10 && !value.toString().includes('0'))
-            this._controls.month?.setValue(`0${value}`)
+            this.controls.month?.setValue(`0${value}`)
 
           this.yearInput?.nativeElement.focus()
         }
@@ -263,14 +262,20 @@ export class NgxMatBirthdayInputComponent
       .subscribe((value) => {
         if (!this._controlValue(value, 'year')) return
         if (value.startsWith('0')) {
-          this._controls.year?.setValue('')
+          this.controls.year?.setValue('')
         }
 
-        if (+value > this.today.getFullYear())
-          this._controls.year?.setValue(this.today.getFullYear().toString())
-        else if (+value < 0 || (+value > 1000 && +value < this.today.getFullYear() - 120))
-          this._controls.year?.setValue((+this.today.getFullYear() - 120).toString())
+        this.yearMethod(value, this.controls)
       })
+  }
+
+  private _yearMethod(value: string, controls = this.controls) {
+    const currentYear = new Date().getFullYear()
+
+    if (+value > currentYear) controls.year?.setValue(currentYear.toString())
+    else if (+value < 0 || (+value > 1000 && +value < currentYear - 120)) {
+      controls.year?.setValue((+currentYear - 120).toString())
+    }
   }
 
   ngDoCheck(): void {
@@ -379,7 +384,7 @@ export class NgxMatBirthdayInputComponent
    */
   private _controlValue(value: string, target: 'day' | 'month' | 'year'): boolean {
     if (isNaN(+value) || value.includes('.')) {
-      this._controls[target]?.setValue(this._formerValues[target])
+      this.controls[target]?.setValue(this._formerValues[target])
       return false
     }
 
