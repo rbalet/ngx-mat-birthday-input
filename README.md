@@ -49,11 +49,19 @@ imports: [NgxMatBirthdayInputComponent];
     floatLabel="always"
   >
     <!-- <mat-label>Birthday</mat-label> -->
+    
+    <!-- 
+      <mat-datepicker-toggle matIconPrefix [for]="myDatePicker">
+        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker touchUi #myDatePicker></mat-datepicker> 
+    -->
 
     <ngx-mat-birthday-input
       formControlName="birthday"
       id="birthday"
     >
+    <!-- [matDatepicker]="myDatePicker" -->
     </ngx-mat-birthday-input>
 
     <!-- <mat-icon matSuffix>event</mat-icon>
