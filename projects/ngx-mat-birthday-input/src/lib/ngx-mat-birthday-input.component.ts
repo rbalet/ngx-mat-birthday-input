@@ -28,6 +28,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 import { ErrorStateMatcher, _AbstractConstructor, mixinErrorState } from '@angular/material/core'
+import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker'
 import {
   MatFormFieldAppearance,
   MatFormFieldControl,
@@ -69,6 +70,7 @@ const _ngxMatBirthdayInputMixinBase: typeof ngxMatBirthdayInputBase = mixinError
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
   ],
 })
 export class NgxMatBirthdayInputComponent
@@ -98,6 +100,7 @@ export class NgxMatBirthdayInputComponent
   @Input() placeholders: [string, string, string] = ['', '', '']
   @Input() name?: string
   @Input() appearance: MatFormFieldAppearance = 'fill'
+  @Input() matDatepicker?: MatDatepicker<any>
 
   @Output() dateChanged: EventEmitter<Date> = new EventEmitter<Date>()
 
@@ -203,6 +206,16 @@ export class NgxMatBirthdayInputComponent
     })
 
     this.itemForm
+      .get('datePicker')
+      ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
+      .subscribe((value) => {
+        console.log(value)
+        this._controls.day?.setValue(value.getDate().toString())
+        this._controls.month?.setValue(value.getMonth().toString())
+        this._controls.year?.setValue(value.getFullYear().toString())
+      })
+
+    this.itemForm
       .get('day')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
@@ -280,11 +293,13 @@ export class NgxMatBirthdayInputComponent
     day: FormControl<string>
     month: FormControl<string>
     year: FormControl<string>
+    datePicker: FormControl<Date>
   }> {
     return this._formBuilder.group({
       day: new FormControl('', { nonNullable: true }),
       month: new FormControl('', { nonNullable: true }),
       year: new FormControl('', { nonNullable: true }),
+      datePicker: new FormControl(new Date(), { nonNullable: true }),
     })
   }
 
@@ -308,12 +323,10 @@ export class NgxMatBirthdayInputComponent
   }
 
   registerOnChange(fn: any): void {
-    console.log('registerOnChange')
     this.propagateChange = fn
   }
 
   registerOnTouched(fn: any): void {
-    console.log('registerOnTouched')
     this.onTouched = fn
   }
 
@@ -324,7 +337,6 @@ export class NgxMatBirthdayInputComponent
   }
 
   writeValue(value: any): void {
-    console.log('writeValue')
     this._updateItemForm(value)
 
     // Value is set from outside using setValue()

@@ -1,5 +1,9 @@
 :host {
-  .birthday-form {
+  .ngxMatBirthdayInput-hidden {
+    display: none;
+    pointer-events: none;
+  }
+  .ngxMatBirthdayInput-form {
     display: flex;
     gap: var(--ngx-mat-birthday-input-gap, 16px);
   }
