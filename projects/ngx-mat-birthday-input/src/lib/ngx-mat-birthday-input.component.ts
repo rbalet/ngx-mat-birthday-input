@@ -101,6 +101,7 @@ export class NgxMatBirthdayInputComponent
   @Input() name?: string
   @Input() appearance: MatFormFieldAppearance = 'fill'
   @Input() matDatepicker?: MatDatepicker<any>
+  @Input() min?: Date
 
   @Output() dateChanged: EventEmitter<Date> = new EventEmitter<Date>()
 
