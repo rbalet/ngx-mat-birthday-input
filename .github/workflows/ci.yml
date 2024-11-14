@@ -57,7 +57,7 @@ jobs:
       - name: 🏗️ Build
         run: npm run build && npm run copy-files
 
-      - name: release
+      - name: 🚀 Release
         run: cd dist/ngx-mat-birthday-input && npx semantic-release --branches main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
