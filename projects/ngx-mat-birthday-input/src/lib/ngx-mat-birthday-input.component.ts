@@ -198,7 +198,14 @@ export class NgxMatBirthdayInputComponent
         value?.year?.length &&
         value.year.length >= 4
       ) {
-        this.propagateChange(new Date(+value.year, +value.month, +value.day).toISOString())
+        const newDate = new Date(+value.year, +value.month, +value.day, value.hour, value.minute)
+        this.itemForm.patchValue(
+          {
+            datePicker: newDate,
+          },
+          { emitEvent: false },
+        )
+        this.propagateChange(newDate.toISOString())
         this._changeDetectorRef.markForCheck()
       }
     })
@@ -208,9 +215,9 @@ export class NgxMatBirthdayInputComponent
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
         // @ToDo: Wont work with multiple datePicker - component instantiation
-        this.controls.day?.setValue(value.getDate().toString())
-        this.controls.month?.setValue(value.getMonth().toString())
-        this.controls.year?.setValue(value.getFullYear().toString())
+        this.controls.day?.patchValue(value.getDate().toString(), { emitEvent: false })
+        this.controls.month?.patchValue(value.getMonth().toString(), { emitEvent: false })
+        this.controls.year?.patchValue(value.getFullYear().toString(), { emitEvent: false })
       })
 
     this.itemForm
@@ -238,7 +245,6 @@ export class NgxMatBirthdayInputComponent
       .get('month')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        console.log('setMonth', value)
         if (value.includes('00')) {
           this.controls.month?.setValue(this._formerValues.month)
           return
@@ -295,12 +301,16 @@ export class NgxMatBirthdayInputComponent
   }
 
   private _createItemForm(): FormGroup<{
+    minute: FormControl<number>
+    hour: FormControl<number>
     day: FormControl<string>
     month: FormControl<string>
     year: FormControl<string>
     datePicker: FormControl<Date>
   }> {
     return this._formBuilder.group({
+      minute: new FormControl(0, { nonNullable: true }),
+      hour: new FormControl(0, { nonNullable: true }),
       day: new FormControl('', { nonNullable: true }),
       month: new FormControl('', { nonNullable: true }),
       year: new FormControl('', { nonNullable: true }),
@@ -308,22 +318,29 @@ export class NgxMatBirthdayInputComponent
     })
   }
 
-  private _updateItemForm(birthday?: string): void {
+  private _updateItemForm(date?: string): void {
+    let minute = 0
+    let hour = 0
     let day = ''
     let month = ''
     let year = ''
 
-    if (birthday) {
-      const tempBDay = new Date(birthday)
+    if (date) {
+      const tempBDay = new Date(date)
+      minute = tempBDay.getMinutes()
+      hour = tempBDay.getHours()
       day = tempBDay.getDate().toString()
       month = tempBDay.getMonth().toString()
       year = tempBDay.getFullYear().toString()
     }
 
     this.itemForm.patchValue({
+      minute: minute,
+      hour: hour,
       day: this._addZero(day),
       month: this._addZero(month),
       year: year,
+      datePicker: date ? new Date(date) : new Date(),
     })
   }
 
