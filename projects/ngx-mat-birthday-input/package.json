@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-birthday-input",
-  "version": "18.0.1",
+  "version": "19.0.0",
   "author": {
     "name": "Raphaël Balet",
     "email": "raphael.balet@outlook.com"
@@ -9,11 +9,11 @@
     "raphael.balet@outlook.com"
   ],
   "peerDependencies": {
-    "@angular/cdk": ">=15.x",
-    "@angular/common": ">=15.x",
-    "@angular/core": ">=15.x",
-    "@angular/forms": ">=15.x",
-    "@angular/material": ">=15.x"
+    "@angular/cdk": ">=19.x",
+    "@angular/common": ">=19.x",
+    "@angular/core": ">=19.x",
+    "@angular/forms": ">=19.x",
+    "@angular/material": ">=19.x"
   },
   "keywords": [
     "angular",

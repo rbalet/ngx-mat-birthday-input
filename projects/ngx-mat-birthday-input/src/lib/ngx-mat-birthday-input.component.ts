@@ -25,7 +25,7 @@ import {
   NgForm,
   ReactiveFormsModule,
 } from '@angular/forms'
-import { ErrorStateMatcher, _AbstractConstructor, mixinErrorState } from '@angular/material/core'
+import { ErrorStateMatcher } from '@angular/material/core'
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker'
 import {
   MatFormFieldAppearance,
@@ -44,16 +44,12 @@ class ngxMatBirthdayInputBase {
   ) {}
 }
 
-const _ngxMatBirthdayInputMixinBase: typeof ngxMatBirthdayInputBase = mixinErrorState(
-  ngxMatBirthdayInputBase as _AbstractConstructor<any>,
-)
-
 @Component({
-  standalone: true,
   selector: 'ngx-mat-birthday-input',
   templateUrl: './ngx-mat-birthday-input.component.html',
   styleUrls: ['./ngx-mat-birthday-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   providers: [
     {
       provide: MatFormFieldControl,
@@ -62,7 +58,6 @@ const _ngxMatBirthdayInputMixinBase: typeof ngxMatBirthdayInputBase = mixinError
   ],
   imports: [
     NgIf,
-
     // Forms
     FormsModule,
     ReactiveFormsModule,
@@ -72,7 +67,7 @@ const _ngxMatBirthdayInputMixinBase: typeof ngxMatBirthdayInputBase = mixinError
   ],
 })
 export class NgxMatBirthdayInputComponent
-  extends _ngxMatBirthdayInputMixinBase
+  extends ngxMatBirthdayInputBase
   implements OnDestroy, DoCheck
 {
   static nextId = 0
@@ -176,6 +171,23 @@ export class NgxMatBirthdayInputComponent
     }
 
     this._subscribe()
+  }
+
+  updateErrorState() {
+    if (
+      this.ngControl &&
+      this.ngControl.invalid &&
+      (this.ngControl.touched || (this._parentForm && this._parentForm.submitted))
+    ) {
+      const currentState = this.errorStateMatcher.isErrorState(
+        this.ngControl.control as FormControl,
+        this.ngControl?.value,
+      )
+      if (currentState !== this.errorState) {
+        this.errorState = currentState
+        this._changeDetectorRef.markForCheck()
+      }
+    }
   }
 
   private _subscribe() {
