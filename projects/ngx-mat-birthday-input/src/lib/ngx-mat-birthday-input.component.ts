@@ -228,7 +228,7 @@ export class NgxMatBirthdayInputComponent
       .subscribe((value) => {
         // @ToDo: Wont work with multiple datePicker - component instantiation
         this.controls.day?.patchValue(value.getDate().toString(), { emitEvent: false })
-        this.controls.month?.patchValue(value.getMonth().toString(), { emitEvent: false })
+        this.controls.month?.patchValue((value.getMonth() + 1).toString(), { emitEvent: false })
         this.controls.year?.patchValue(value.getFullYear().toString(), { emitEvent: false })
       })
 
@@ -342,7 +342,7 @@ export class NgxMatBirthdayInputComponent
       minute = tempBDay.getMinutes()
       hour = tempBDay.getHours()
       day = tempBDay.getDate().toString()
-      month = tempBDay.getMonth().toString()
+      month = (tempBDay.getMonth() + 1).toString()
       year = tempBDay.getFullYear().toString()
     }
 
