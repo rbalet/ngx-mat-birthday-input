@@ -284,6 +284,7 @@ export class NgxMatBirthdayInputComponent
         }
 
         this._controlDayOfMonth(value)
+        this._setDayValidator(Number(value))
       })
 
     this.itemForm
@@ -321,6 +322,18 @@ export class NgxMatBirthdayInputComponent
       if (dayValue > 30) {
         this.controls.day?.patchValue('30', { emitEvent: false })
       }
+    }
+  }
+
+  private _setDayValidator(monthValue: number) {
+    if (
+      Number(this.controls.year.value) > this._min.getFullYear() || // If year is greater than min year
+      (Number(this.controls.year.value) === this._min.getFullYear() &&
+        monthValue > this._min.getMonth() + 1) // If year is equal to min year and month is greater than min month
+    ) {
+      this.controls.day?.clearValidators()
+    } else {
+      this.controls.day?.setValidators(Validators.min(this._min.getDate()))
     }
   }
 
