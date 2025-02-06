@@ -24,6 +24,7 @@ import {
   NgControl,
   NgForm,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core'
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker'
@@ -80,9 +81,9 @@ export class NgxMatBirthdayInputComponent
 
   itemForm = this._createItemForm()
   controls = {
-    day: this.itemForm.get('day'),
-    month: this.itemForm.get('month'),
-    year: this.itemForm.get('year'),
+    day: this.itemForm.get('day')!,
+    month: this.itemForm.get('month')!,
+    year: this.itemForm.get('year')!,
   }
 
   today = new Date()
@@ -94,8 +95,17 @@ export class NgxMatBirthdayInputComponent
   @Input() name?: string
   @Input() appearance: MatFormFieldAppearance = 'fill'
   @Input() matDatepicker?: MatDatepicker<any>
-  @Input() min?: Date
   @Input() yearMethod: (value: string, controls: any) => void = this._yearMethod
+
+  private _min!: Date
+  @Input() set min(value: Date) {
+    this._min = value
+
+    this.controls.year?.addValidators(Validators.min(value.getFullYear()))
+  }
+  get min(): Date {
+    return this._min
+  }
 
   private _unsubscribe$: Subject<void> = new Subject()
   private _placeholder?: string
@@ -272,6 +282,8 @@ export class NgxMatBirthdayInputComponent
 
           this.yearInput?.nativeElement.focus()
         }
+
+        this._controlDayOfMonth(value)
       })
 
     this.itemForm
@@ -284,6 +296,8 @@ export class NgxMatBirthdayInputComponent
         }
 
         this.yearMethod(value, this.controls)
+
+        this._setMonthValidator(Number(value))
       })
   }
 
@@ -293,6 +307,28 @@ export class NgxMatBirthdayInputComponent
     if (+value > currentYear) controls.year?.setValue(currentYear.toString())
     else if (+value < 0 || (+value > 1000 && +value < currentYear - 120)) {
       controls.year?.setValue((+currentYear - 120).toString())
+    }
+  }
+
+  private _controlDayOfMonth(monthValue: string) {
+    const dayValue = Number(this.controls.day.value)
+
+    if (monthValue === '02') {
+      if (dayValue > 29) {
+        this.controls.day?.patchValue('29', { emitEvent: false })
+      }
+    } else if (['04', '06', '09', '11'].includes(monthValue)) {
+      if (dayValue > 30) {
+        this.controls.day?.patchValue('30', { emitEvent: false })
+      }
+    }
+  }
+
+  private _setMonthValidator(yearValue: number) {
+    if (yearValue > this._min.getFullYear()) {
+      this.controls.month?.clearValidators()
+    } else {
+      this.controls.month?.setValidators(Validators.min(this._min.getMonth() + 1))
     }
   }
 

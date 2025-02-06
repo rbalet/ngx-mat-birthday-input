@@ -8,9 +8,10 @@ An Angular Material library for entering a birthday.
 
 1. Split a date into 3 input fields, day, month and year, then reassemble and save them into a given formControl. 
 2. **Automatically add `0`** in front of the day/month number.
-3. **Remove `.` and `e`** from the possible input.
-4. Does **automatically focus the next field** when needed. 
-5. Based on the [Vitaly Friedman](https://www.smashingmagazine.com/author/vitaly-friedman/) article, [Designing Birthday Picker UX: Simpler Is Better](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker/#designing-a-better-birthday-input)
+3. Control the form value with the max number for day & month
+4. **Remove `.` and `e`** from the possible input.
+5. Does **automatically focus the next field** when needed. 
+6. Based on the [Vitaly Friedman](https://www.smashingmagazine.com/author/vitaly-friedman/) article, [Designing Birthday Picker UX: Simpler Is Better](https://www.smashingmagazine.com/2021/05/frustrating-design-patterns-birthday-picker/#designing-a-better-birthday-input)
 
 
 | fill                                                                                                      | outlined                                                                                                    |
@@ -88,6 +89,14 @@ imports: [NgxMatBirthdayInputComponent];
 | ------------------------------ | ------- | --------------------------------- |
 | `--ngx-mat-birthday-input-gap` | `16px`  | Change the gap between the inputs |
 
+## Auto formatting
+### Month
+- Max 12
+
+### Day
+- Month: 2 -> max 29
+- Month: 4, 6, 9 & 11 -> max 30
+- Month: else -> max 31 
 
 ## Authors and acknowledgment
 * maintainer [Raphaël Balet](https://github.com/rbalet)

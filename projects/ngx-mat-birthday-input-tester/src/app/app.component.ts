@@ -16,7 +16,7 @@ export class AppComponent {
     birthday: ['', [Validators.max]],
   })
 
-  tomorrow = new Date().getDate() + 1
+  today = new Date()
 
   constructor(private _formBuilder: FormBuilder) {}
 }

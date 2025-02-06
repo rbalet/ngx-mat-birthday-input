@@ -21,13 +21,14 @@
 
 <form #f2="ngForm" [formGroup]="emptyBirthdayForm">
   <mat-form-field floatLabel="always" class="no-border">
-    <mat-label>Birthday</mat-label>
+    <mat-label>Birthday: Min today</mat-label>
 
     <!-- @TODO : add min & max -->
     <ngx-mat-birthday-input
       formControlName="birthday"
       id="birthday"
       appearance="outline"
+      [min]="today"
     ></ngx-mat-birthday-input>
 
     <mat-error *ngIf="emptyBirthdayForm?.get('birthday')?.invalid">
