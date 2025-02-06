@@ -227,6 +227,7 @@ export class NgxMatBirthdayInputComponent
           },
           { emitEvent: false },
         )
+
         this.propagateChange(newDate.toISOString())
         this._changeDetectorRef.markForCheck()
       }
@@ -284,7 +285,11 @@ export class NgxMatBirthdayInputComponent
         }
 
         this._controlDayOfMonth(value)
-        this._setDayValidator(Number(value))
+
+        if (value.length >= 2 && this.controls.year.value.length >= 4) {
+          this._setDayValidator()
+          this.controls.day.updateValueAndValidity()
+        }
       })
 
     this.itemForm
@@ -298,7 +303,13 @@ export class NgxMatBirthdayInputComponent
 
         this.yearMethod(value, this.controls)
 
-        this._setMonthValidator(Number(value))
+        if (value.length >= 4) {
+          this._setDayValidator()
+          this._setMonthValidator()
+
+          this.controls.day.updateValueAndValidity()
+          this.controls.month.updateValueAndValidity()
+        }
       })
   }
 
@@ -325,7 +336,7 @@ export class NgxMatBirthdayInputComponent
     }
   }
 
-  private _setDayValidator(monthValue: number) {
+  private _setDayValidator(monthValue = Number(this.controls.month.value)) {
     if (
       Number(this.controls.year.value) > this._min.getFullYear() || // If year is greater than min year
       (Number(this.controls.year.value) === this._min.getFullYear() &&
@@ -337,7 +348,7 @@ export class NgxMatBirthdayInputComponent
     }
   }
 
-  private _setMonthValidator(yearValue: number) {
+  private _setMonthValidator(yearValue = Number(this.controls.year.value)) {
     if (yearValue > this._min.getFullYear()) {
       this.controls.month?.clearValidators()
     } else {
