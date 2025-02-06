@@ -346,14 +346,18 @@ export class NgxMatBirthdayInputComponent
       year = tempBDay.getFullYear().toString()
     }
 
-    this.itemForm.patchValue({
-      minute: minute,
-      hour: hour,
-      day: day.padStart(2, '0'),
-      month: month.padStart(2, '0'),
-      year: year,
-      datePicker: date ? new Date(date) : new Date(),
-    })
+    this.itemForm.patchValue(
+      {
+        minute: minute,
+        hour: hour,
+        year: year,
+        datePicker: date ? new Date(date) : new Date(),
+      },
+      { emitEvent: false },
+    )
+
+    this.itemForm.get('day')?.patchValue(day.padStart(2, '0'), { emitEvent: true })
+    this.itemForm.get('month')?.patchValue(month.padStart(2, '0'), { emitEvent: true })
   }
 
   registerOnChange(fn: any): void {
