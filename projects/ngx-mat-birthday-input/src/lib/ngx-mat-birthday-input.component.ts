@@ -97,6 +97,12 @@ export class NgxMatBirthdayInputComponent
   @Input() matDatepicker?: MatDatepicker<any>
   @Input() yearMethod: (value: string, controls: any) => void = this._yearMethod
 
+  @Input() fields = {
+    day: true,
+    month: true,
+    year: true,
+  }
+
   private _min!: Date
   @Input() set min(value: Date) {
     this._min = value

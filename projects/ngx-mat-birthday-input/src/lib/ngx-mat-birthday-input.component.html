@@ -1,4 +1,5 @@
 <form class="ngxMatBirthdayInput-form" [formGroup]="itemForm" [autocomplete]="autocomplete">
+  @if(fields.day) {
   <mat-form-field class="day-input" subscriptSizing="dynamic" [appearance]="appearance">
     <mat-label *ngIf="labels">{{ labels[0] }}</mat-label>
     <input
@@ -12,6 +13,7 @@
       [placeholder]="placeholders[0]"
     />
   </mat-form-field>
+  } @if(fields.month) {
   <mat-form-field class="month-input" subscriptSizing="dynamic" [appearance]="appearance">
     <mat-label *ngIf="labels">{{ labels[1] }}</mat-label>
     <input
@@ -26,6 +28,7 @@
       #monthInput
     />
   </mat-form-field>
+  } @if(fields.year) {
   <mat-form-field class="year-input" subscriptSizing="dynamic" [appearance]="appearance">
     <mat-label *ngIf="labels">{{ labels[2] }}</mat-label>
     <input
@@ -39,8 +42,7 @@
       #yearInput
     />
   </mat-form-field>
-
-  @if (matDatepicker) {
+  } @if (matDatepicker) {
   <input
     class="ngxMatBirthdayInput-hidden"
     placeholder="dd/mm/yyyyy"

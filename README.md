@@ -75,15 +75,16 @@ imports: [NgxMatBirthdayInputComponent];
 
 ## Options
 
-| Options         | Type            | Default                | Description                            |
-| --------------- | --------------- | ---------------------- | -------------------------------------- |
-| formControlName | `FormControl`   | `undefined`            | Control to be updated                  |
-| autocomplete    | `"on" or "off"` | `"on"`                 | Use the default browser autofill       |
-| labels          | `string[]`      | `["DD", "MM", "YYYY"]` | Label used by the mat-input            |
-| placeholders    | `string[]`      | `["", "", ""]`         | with an *s*                            |
-| required        | `boolean`       | `undefined`            |                                        |
-| disabled        | `boolean`       | `undefined`            |                                        |
-| min             | `date`          | `undefined`            | Activate min validators on each fields |
+| Options         | Type                                            | Default                                | Description                            |
+| --------------- | ----------------------------------------------- | -------------------------------------- | -------------------------------------- |
+| formControlName | `FormControl`                                   | `undefined`                            | Control to be updated                  |
+| autocomplete    | `"on" or "off"`                                 | `"on"`                                 | Use the default browser autofill       |
+| labels          | `string[]`                                      | `["DD", "MM", "YYYY"]`                 | Label used by the mat-input            |
+| placeholders    | `string[]`                                      | `["", "", ""]`                         | with an *s*                            |
+| required        | `boolean`                                       | `undefined`                            |                                        |
+| disabled        | `boolean`                                       | `undefined`                            |                                        |
+| min             | `date`                                          | `undefined`                            | Activate min validators on each fields |
+| fields          | `{day: boolean, month: boolean, year: boolean}` | `{day: true, month: true, year: true}` | Show specifies fields                  |
 
 ## Css variable
 | Name                           | Default | Explanation                       |

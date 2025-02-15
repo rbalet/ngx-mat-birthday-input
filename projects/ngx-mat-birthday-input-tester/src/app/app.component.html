@@ -37,6 +37,20 @@
   </mat-form-field>
 </form>
 
+<form #f2="ngForm" [formGroup]="emptyBirthdayForm">
+  <mat-form-field floatLabel="always" class="no-border">
+    <mat-label>Hidden year</mat-label>
+
+    <!-- @TODO : add max -->
+    <ngx-mat-birthday-input
+      formControlName="birthday"
+      id="birthday"
+      appearance="outline"
+      [fields]="{ day: true, month: true, year: false }"
+    ></ngx-mat-birthday-input>
+  </mat-form-field>
+</form>
+
 <div class="buttons-container">
   <button mat-stroked-button (click)="emptyBirthdayForm.reset(); filledBirthdayForm.reset()">
     Reset
