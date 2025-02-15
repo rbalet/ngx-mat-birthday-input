@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { BrowserModule } from '@angular/platform-browser'
-import { NgxMatBirthdayInputComponent } from '../../../ngx-mat-birthday-input/src/lib/ngx-mat-birthday-input.component'
+import { NgxMatDateInputComponent } from '../../../ngx-mat-date-input/src/lib/ngx-mat-date-input.component'
 import { AppComponent } from './app.component'
 
 @NgModule({
@@ -24,7 +24,7 @@ import { AppComponent } from './app.component'
     MatButtonModule,
 
     // Vendors
-    NgxMatBirthdayInputComponent,
+    NgxMatDateInputComponent,
   ],
   bootstrap: [AppComponent],
 })

@@ -6,9 +6,9 @@
       "files": ["*.ts"],
       "parserOptions": {
         "project": [
-          "projects/ngx-mat-birthday-input-tester//tsconfig.app.json",
-          "projects/ngx-mat-birthday-input-tester//tsconfig.spec.json",
-          "projects/ngx-mat-birthday-input-tester//e2e/tsconfig.json"
+          "projects/ngx-mat-date-input-tester//tsconfig.app.json",
+          "projects/ngx-mat-date-input-tester//tsconfig.spec.json",
+          "projects/ngx-mat-date-input-tester//e2e/tsconfig.json"
         ],
         "createDefaultProgram": true
       },

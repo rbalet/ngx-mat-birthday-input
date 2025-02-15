@@ -28,7 +28,7 @@ jobs:
   #   uses: codecov/codecov-action@v4.0.1
   #   with:
   #     token: ${{ secrets.CODECOV_TOKEN }}
-  #     slug: rbalet/ngx-mat-birthday-input
+  #     slug: rbalet/ngx-mat-date-input
 
   publish:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
         run: npm run build && npm run copy-files
 
       - name: 🚀 Release
-        run: cd dist/ngx-mat-birthday-input && npx semantic-release --branches main
+        run: cd dist/ngx-mat-date-input && npx semantic-release --branches main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

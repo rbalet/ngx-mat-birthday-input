@@ -13,9 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngx-mat-birthday-input": [
-        "dist/ngx-mat-birthday-input"
-      ]
+      "ngx-mat-date-input": ["dist/ngx-mat-date-input"]
     },
     "declaration": false,
     "experimentalDecorators": true,
@@ -24,10 +22,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

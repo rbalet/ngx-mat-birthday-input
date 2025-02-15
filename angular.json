@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-mat-birthday-input": {
+    "ngx-mat-date-input": {
       "projectType": "library",
-      "root": "projects/ngx-mat-birthday-input",
-      "sourceRoot": "projects/ngx-mat-birthday-input/src",
+      "root": "projects/ngx-mat-date-input",
+      "sourceRoot": "projects/ngx-mat-date-input/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-mat-birthday-input/ng-package.json"
+            "project": "projects/ngx-mat-date-input/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-mat-birthday-input/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-mat-date-input/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-mat-birthday-input/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-mat-date-input/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/ngx-mat-birthday-input/tsconfig.spec.json",
+            "tsConfig": "projects/ngx-mat-date-input/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
@@ -36,9 +36,9 @@
         }
       }
     },
-    "ngx-mat-birthday-input-tester": {
-      "root": "projects/ngx-mat-birthday-input-tester/",
-      "sourceRoot": "projects/ngx-mat-birthday-input-tester/src",
+    "ngx-mat-date-input-tester": {
+      "root": "projects/ngx-mat-date-input-tester/",
+      "sourceRoot": "projects/ngx-mat-date-input-tester/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {},
@@ -48,30 +48,30 @@
           "options": {
             "aot": true,
             "outputPath": {
-              "base": "dist/ngx-mat-birthday-input-tester"
+              "base": "dist/ngx-mat-date-input-tester"
             },
-            "index": "projects/ngx-mat-birthday-input-tester/src/index.html",
+            "index": "projects/ngx-mat-date-input-tester/src/index.html",
             "polyfills": [
-              "projects/ngx-mat-birthday-input-tester/src/polyfills.ts"
+              "projects/ngx-mat-date-input-tester/src/polyfills.ts"
             ],
-            "tsConfig": "projects/ngx-mat-birthday-input-tester/tsconfig.app.json",
+            "tsConfig": "projects/ngx-mat-date-input-tester/tsconfig.app.json",
             "assets": [
-              "projects/ngx-mat-birthday-input-tester/src/favicon.ico",
-              "projects/ngx-mat-birthday-input-tester/src/assets"
+              "projects/ngx-mat-date-input-tester/src/favicon.ico",
+              "projects/ngx-mat-date-input-tester/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/ngx-mat-birthday-input-tester/src/styles.scss"
+              "projects/ngx-mat-date-input-tester/src/styles.scss"
             ],
             "scripts": [],
-            "browser": "projects/ngx-mat-birthday-input-tester/src/main.ts"
+            "browser": "projects/ngx-mat-date-input-tester/src/main.ts"
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ngx-mat-birthday-input-tester/src/environments/environment.ts",
-                  "with": "projects/ngx-mat-birthday-input-tester/src/environments/environment.prod.ts"
+                  "replace": "projects/ngx-mat-date-input-tester/src/environments/environment.ts",
+                  "with": "projects/ngx-mat-date-input-tester/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -96,26 +96,26 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "ngx-mat-birthday-input-tester:build"
+            "buildTarget": "ngx-mat-date-input-tester:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "ngx-mat-birthday-input-tester:build:production"
+              "buildTarget": "ngx-mat-date-input-tester:build:production"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-mat-birthday-input-tester/src/test.ts",
-            "tsConfig": "projects/ngx-mat-birthday-input-tester/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-mat-birthday-input-tester/karma.conf.js",
+            "main": "projects/ngx-mat-date-input-tester/src/test.ts",
+            "tsConfig": "projects/ngx-mat-date-input-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-mat-date-input-tester/karma.conf.js",
             "assets": [
-              "projects/ngx-mat-birthday-input-tester/src/favicon.ico",
-              "projects/ngx-mat-birthday-input-tester/src/assets"
+              "projects/ngx-mat-date-input-tester/src/favicon.ico",
+              "projects/ngx-mat-date-input-tester/src/assets"
             ],
             "styles": [
-              "projects/ngx-mat-birthday-input-tester/src/styles.scss"
+              "projects/ngx-mat-date-input-tester/src/styles.scss"
             ],
             "scripts": []
           }
@@ -124,20 +124,20 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ngx-mat-birthday-input-tester//**/*.ts",
-              "projects/ngx-mat-birthday-input-tester//**/*.html"
+              "projects/ngx-mat-date-input-tester//**/*.ts",
+              "projects/ngx-mat-date-input-tester//**/*.html"
             ]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/ngx-mat-birthday-input-tester/e2e/protractor.conf.js",
-            "devServerTarget": "ngx-mat-birthday-input-tester:serve"
+            "protractorConfig": "projects/ngx-mat-date-input-tester/e2e/protractor.conf.js",
+            "devServerTarget": "ngx-mat-date-input-tester:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ngx-mat-birthday-input-tester:serve:production"
+              "devServerTarget": "ngx-mat-date-input-tester:serve:production"
             }
           }
         }

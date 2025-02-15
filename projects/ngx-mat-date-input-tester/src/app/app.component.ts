@@ -8,12 +8,12 @@ import { FormBuilder, Validators } from '@angular/forms'
   standalone: false,
 })
 export class AppComponent {
-  filledBirthdayForm = this._formBuilder.group({
-    birthday: [new Date(), [Validators.max]],
+  filledDateForm = this._formBuilder.group({
+    date: [new Date(), [Validators.max]],
   })
 
-  emptyBirthdayForm = this._formBuilder.group({
-    birthday: ['', [Validators.max]],
+  emptyDateForm = this._formBuilder.group({
+    date: ['', [Validators.max]],
   })
 
   today = new Date()

@@ -1,5 +1,5 @@
 {
-  "name": "ngx-mat-birthday-input",
+  "name": "ngx-mat-date-input",
   "version": "19.3.0",
   "author": {
     "name": "Raphaël Balet",
@@ -18,11 +18,11 @@
   "keywords": [
     "angular",
     "input",
-    "birthday"
+    "date"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rbalet/ngx-mat-birthday-input"
+    "url": "git+https://github.com/rbalet/ngx-mat-date-input"
   },
   "license": "MIT",
   "dependencies": {

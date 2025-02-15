@@ -1,15 +1,15 @@
 {
-  "name": "ngx-mat-birthday-input",
+  "name": "ngx-mat-date-input",
   "version": "19.3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build ngx-mat-birthday-input --configuration production",
+    "build": "ng build ngx-mat-date-input --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:ci": "ng test ngx-mat-birthday-input --watch=false --code-coverage --no-progress --browsers=ChromeHeadless",
-    "publish": "ng build ngx-mat-birthday-input --configuration production && npm run copy-files && npm publish ./dist/ngx-mat-birthday-input",
-    "copy-files": "cp README.md dist/ngx-mat-birthday-input && cp LICENSE dist/ngx-mat-birthday-input",
+    "test:ci": "ng test ngx-mat-date-input --watch=false --code-coverage --no-progress --browsers=ChromeHeadless",
+    "publish": "ng build ngx-mat-date-input --configuration production && npm run copy-files && npm publish ./dist/ngx-mat-date-input",
+    "copy-files": "cp README.md dist/ngx-mat-date-input && cp LICENSE dist/ngx-mat-date-input",
     "prepare": "husky"
   },
   "private": true,

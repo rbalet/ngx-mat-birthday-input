@@ -36,7 +36,7 @@ import {
 import { MatInputModule } from '@angular/material/input'
 import { Subject, takeUntil } from 'rxjs'
 
-class ngxMatBirthdayInputBase {
+class ngxMatDateInputBase {
   constructor(
     public _defaultErrorStateMatcher: ErrorStateMatcher,
     public _parentForm: NgForm,
@@ -46,15 +46,15 @@ class ngxMatBirthdayInputBase {
 }
 
 @Component({
-  selector: 'ngx-mat-birthday-input',
-  templateUrl: './ngx-mat-birthday-input.component.html',
-  styleUrls: ['./ngx-mat-birthday-input.component.scss'],
+  selector: 'ngx-mat-date-input',
+  templateUrl: './ngx-mat-date-input.component.html',
+  styleUrls: ['./ngx-mat-date-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   providers: [
     {
       provide: MatFormFieldControl,
-      useExisting: NgxMatBirthdayInputComponent,
+      useExisting: NgxMatDateInputComponent,
     },
   ],
   imports: [
@@ -67,17 +67,14 @@ class ngxMatBirthdayInputBase {
     MatDatepickerModule,
   ],
 })
-export class NgxMatBirthdayInputComponent
-  extends ngxMatBirthdayInputBase
-  implements OnDestroy, DoCheck
-{
+export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnDestroy, DoCheck {
   static nextId = 0
 
   @ViewChild('monthInput', { static: true }) monthInput!: ElementRef
   @ViewChild('yearInput', { static: true }) yearInput!: ElementRef
 
   @HostBinding()
-  id = `ngxMatBirthdayInput-${NgxMatBirthdayInputComponent.nextId++}`
+  id = `ngxMatDateInput-${NgxMatDateInputComponent.nextId++}`
 
   itemForm = this._createItemForm()
   controls = {
